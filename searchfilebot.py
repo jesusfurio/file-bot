@@ -1,10 +1,10 @@
 import sys
 from subprocess import (PIPE, Popen)
-import telebot # Librería de la API del bot.
-from telebot import types # Tipos para la API del bot.
-import time # Librería para hacer que el programa que controla el bot no se acabe.
+import telebot 
+from telebot import types 
+import time 
 
-token = '815269157:AAF-zmsozY8_OIgsYnaipcn1BLQ5xDS8mCk'
+token = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 
 tb = telebot.TeleBot(token)
 
