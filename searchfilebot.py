@@ -29,7 +29,7 @@ def sendWelcome(message):
 @bot.message_handler(commands=['list'])
 def sendList(m):
     chat_id = m.chat.id
-    file_list = "cat /directory/prueba.txt"
+    file_list = "cat /directory/test.txt"
     result = invoke(file_list)
     bot.send_message(chat_id, result)
 
@@ -38,7 +38,7 @@ def getFile(m):
     import requests
     chat_id = m.chat.id
     msg = m.text[4:]
-    search_file = "grep -i {} /directorys/prueba.txt".format(msg)
+    search_file = "grep -i {} /directory/test.txt".format(msg)
     execute_search = invoke(search_file)
     if (len(execute_search.split('\n'))) > 2 or (len(execute_search.split('\n'))) < 2:
         bot.send_message(chat_id, "More than one result, please repeat search :")
@@ -56,12 +56,6 @@ while True:
     try:
 
         bot.polling(none_stop=True)
-
-    # ConnectionError and ReadTimeout because of possible timout of the requests library
-
-    # TypeError for moviepy errors
-
-    # maybe there are others, therefore Exception
 
     except Exception as e:
 
