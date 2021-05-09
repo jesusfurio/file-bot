@@ -10,10 +10,6 @@ https://planetachatbot.com/c%C3%B3mo-crear-un-bot-para-telegram-y-darle-funciona
 
 Cuando lo tengas creado, deberás guardar el token facilitado al crear el bot.
 
-
-
-* Si queremos despl
-
 ## Despliegue en VM 📦
 * En el caso de no querer usar Docker para ejecutar el bot, es necesario realizar la instalación de la librería pyTelegramBotAPI con:
 ```
