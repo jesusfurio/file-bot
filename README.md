@@ -27,7 +27,7 @@ pip install pyTelegramBotAPI
 python3 main.py
 ```
 
-## Despliegue con Docker 📦
+## Despliegue con Docker :whale:
 
 * Primero construiremos la imagen que contendrá nuestro bot:
 ```
