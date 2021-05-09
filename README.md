@@ -35,6 +35,12 @@ docker build -t file-bot .
 docker run -dti --env TOKEN="nuestro_token" --env FOLDER="/carpeta_contenido" -v /carpeta_host/:/carpeta_contenido --name file-bot-container file-bot 
 ```
 
+## Pipelines
+En la carpeta "pipelines" podeis encontrar un fichero Jenkinsfile para realizar los test de calidad, seguridad y estáticos con las siguientes librerías de Python:
+* [flake8]: https://flake8.pycqa.org/en/latest/ -
+* [radon]: https://pypi.org/project/radon/ -
+* [bandit]: https://pypi.org/project/bandit/ -
+
 ## Librerías usadas :books:
 Python:
 * [pyTelegramBotAPI]: https://github.com/eternnoir/pyTelegramBotAPI - Usada para crear el bot.

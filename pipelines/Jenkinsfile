@@ -1,0 +1,72 @@
+pipeline {
+    agent {
+        kubernetes {
+            label 'alpine-python3'
+        }
+    }
+    stages {
+        stage('SetUp') {
+            steps{
+                sh "pip3 install -r requirements.txt"
+            }
+        }
+        stage('Run tests'){
+            parallel{
+                stage('Static Test'){
+                    steps {
+                        script {
+                            // Static program analysis -> radon
+                            def radonOutput = sh (
+                                script: 'radon cc src test -n C',
+                                returnStdout: true
+                                ).trim()
+                            if (radonOutput.length() != 0) {
+                                echo radonOutput
+                                currentBuild.result = 'ABORTED'
+                                error("Code's cyclomatic complexity is C or lower in some files!")
+                            } else {
+                                echo "Nice code!"
+                            }
+                        }
+                    }
+                }
+                stage('Quality test') {
+                    steps{
+                        script{
+                            // Quality program analysis -> flake8
+                            def flak8Output = sh (
+                                script: 'flake8 --ignore W292 src',
+                                returnStdout: true
+                                ).trim()
+                            if (flak8Output.length() != 0) {
+                                echo flak8Output
+                                currentBuild.result = 'ABORTED'
+                                error("Code not according to pep8 styling guide")
+                            } else {
+                                echo "Nice code!"
+                            }
+                        }
+                    }
+                }
+                stage('Security test') {
+                    steps {
+                        script {
+                            // Security programa analysis -> bandit
+                            def banditOutput = sh (
+                                script: 'bandit -q -lll -r src test',
+                                returnStdout: true
+                                ).trim()
+                            if (banditOutput.length() != 0) {
+                                echo banditOutput
+                                currentBuild.result = 'ABORTED'
+                                error("Code not according with security guide")
+                            } else {
+                                echo "Nice code!"
+                            }
+                        }
+                    }
+                }   
+            }
+        }     
+    }
+}
