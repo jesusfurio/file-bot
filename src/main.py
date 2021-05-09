@@ -2,7 +2,7 @@ import telebot
 import os 
 from telebot import types 
 
-token = 'token'
+token = os.environ.get('TOKEN')
 
 bot = telebot.TeleBot(token)
 
@@ -14,7 +14,7 @@ def listener(message):
 
 bot.set_update_listener(listener)
 
-folder = "/path_with_files/"
+folder = os.environ.get('FOLDER')
 
 @bot.message_handler(commands=['start'])
 def sendWelcome(message):
